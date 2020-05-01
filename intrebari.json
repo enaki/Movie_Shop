@@ -1,0 +1,55 @@
+[
+  {
+    "intrebare": "Ce gen de filme preferati?",
+    "variante": [
+      "horror",
+      "antena 3 shows",
+      "drama",
+      "actiune"
+    ],
+    "corect": 0
+  },
+  {
+    "intrebare": "Care parte din Harry Potter va place?",
+    "variante": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "corect": 2
+  },
+  {
+    "intrebare": "Care?",
+    "variante": [
+      "LoTR",
+      "Hobbit",
+      "Insidious"
+    ],
+    "corect": 3
+  },
+  {
+    "intrebare": "Ce animal are Harry?",
+    "variante": [
+      "Câine",
+      "Bufnitță",
+      "Pisică",
+      "Șarpe"
+    ],
+    "corect": 1
+  },
+  {
+    "intrebare": "Cine NU e membru al ordinului Phoenix?",
+    "variante": [
+      "Remus Lupin",
+      "Siruis Black",
+      "Lucious Malfoy",
+      "Severus Snape"
+    ],
+    "corect": 2
+  }
+]

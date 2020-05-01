@@ -1,0 +1,27 @@
+<p style="color: red; text-align: center">Filme Chestionar Răspunsuri</p>
+
+<%
+    var numar_raspunsuri_corecte = 0;
+    raspunsuri = JSON.parse(raspunsuri)
+    for(var i = 0; i < intrebari.length; i++)  {%>
+        <p style="color: blue"><%=intrebari[i].intrebare%></p>
+    <%
+        let correct = false;
+        if (intrebari[i].corect == raspunsuri['question_' + i]){
+            numar_raspunsuri_corecte++;
+            correct = true;
+        }
+        %><ol><%
+        for(var j = 0; j < intrebari[i].variante.length; j++)  {
+            if (intrebari[i].corect == j){%>
+                <li  style="color: green"><%=intrebari[i].variante[j]%></li><br>
+        <%  } else if (j == raspunsuri['question_' + i]) { %>
+                <li style="color: red"><%=intrebari[i].variante[j]%></li><br>
+        <%  } else { %>
+                <li ><%=intrebari[i].variante[j]%></li><br>
+        <%  }
+        }
+        %></ol><%
+    }
+    %>
+<p style="color: magenta">In total ati raspuns <%=numar_raspunsuri_corecte%> intrebari corecte</p>

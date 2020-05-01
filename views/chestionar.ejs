@@ -1,0 +1,12 @@
+<p style="color: red; text-align: center">Filme Chestionar</p>
+<form method="post" action="rezultat-chestionar">
+<% for(var i = 0; i < intrebari.length; i++)  {%>
+
+    <p style="color: blue"><%=intrebari[i].intrebare%></p>
+    <% for(var j = 0; j < intrebari[i].variante.length; j++)  { %>
+        <input type="radio" id="quiz_<%=j%>" name="question_<%=i%>" value=<%=j%>>
+        <label for="quiz_<%=j%>"><%=intrebari[i].variante[j]%></label><br>
+    <%} %>
+<%} %>
+<button >Trimite</button>
+</form>
