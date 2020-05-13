@@ -1,0 +1,30 @@
+<h1>Bine ați venit la cosul dumneavoastra
+    <%
+    if (user){
+    %>, <%=user%>
+    <%}%>
+    !
+</h1>
+
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Produs</th>
+        <th scope="col">Pret</th>
+        <th scope="col">Cantitate</th>
+        <th scope="col">Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(var i = 0; i < produse.length; i++)  { %>
+    <tr>
+        <th scope="col"><%=i+1%></th>
+        <th scope="col"><%=produse[i].titlu%></th>
+        <th scope="col"><%=produse[i].price%></th>
+        <th scope="col"><%=produse[i].cantitate%></th>
+        <th scope="col"><%=produse[i].cantitate * produse[i].price%></th>
+    </tr>
+    <%} %>
+    </tbody>
+</table>

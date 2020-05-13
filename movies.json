@@ -1,0 +1,19 @@
+[
+  {
+    "titlu": "Harry Potter",
+    "price": 10
+  },
+  {
+    "titlu": "Star Wars",
+    "price": 20
+  },
+  {
+    "titlu": "Insidious",
+    "price": 30
+  },
+  {
+    "titlu": "Conjuring",
+    "price": 40
+  }
+
+]

@@ -5,6 +5,44 @@
     <%}%>
     !
 </h1>
+</br>
+<div class="row">
+    <div class="b4-col-lg-10 col-mg-10 col-sm-8">
 
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Produs</th>
+            <th scope="col">Pret</th>
+            <th scope="col">Operatiuni</th>
+        </tr>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < produse.length; i++)  { %>
+            <tr>
+                <th scope="col"><%=i+1%></th>
+                <th scope="col"><%=produse[i].titlu%></th>
+                <th scope="col"><%=produse[i].price%></th>
+                <th scope="col">
+                    <%if (user){%>
+                    <form action="/adaugare_cos" method="post">
+                        <input type="hidden" id="custId" name="id" value="<%=produse[i]._id%>">
+                        <button class="btn btn-primary" type="submit">Adauga</button>
+                    </form>
 
-
+                    <%}%>
+                </th>
+            </tr>
+            <%} %>
+        </tbody>
+    </table>
+    </div>
+    <div class="b4-col-lg-1 col-mg-1 col-sm-4">
+        <a name="" id="" class="btn btn-primary btn-block " href="/creare-bd" role="button">Creare BD</a> <br/>
+        <a name="" id="" class="btn btn-primary btn-block" href="/inserare-bd" role="button">Încărcare BD</a>
+        <%if (user){%>
+            <a name="" id="" class="btn btn-primary btn-block" href="/vizualizare-cos" role="button">Vizualizare Cos</a>
+        <%}%>
+    </div>
+</div>
