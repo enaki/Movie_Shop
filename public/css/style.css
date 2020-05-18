@@ -1,0 +1,63 @@
+body{
+    color: black;
+}
+footer, nav {
+    background: black;
+}
+
+li a:hover {
+    background: purple;
+    color: white;
+}
+li a {
+    color: orange;
+}
+
+.question {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.title {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 2rem;
+    color: red;
+    text-align: center;
+}
+
+input[type='radio']:after {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+input[type='radio']:checked:after {
+    background-color: #ffa500;
+}
+
+html, body {
+    height: 100%;
+}
+
+#container {
+    min-height: 90%;
+}
+
+#main {
+    overflow: auto;
+}
+
+.quiz_question{
+    background: #e0ecc9;
+    border: solid #ffa500;
+    border-radius: 20px;
+}
