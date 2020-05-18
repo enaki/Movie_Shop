@@ -1,27 +1,42 @@
-<p style="color: red; text-align: center">Filme Chestionar Răspunsuri</p>
+<div class="d-flex justify-content-center b4-">
+    <div class='row'>
+        <div class="col-md-12 col-lg-12">
 
-<%
-    var numar_raspunsuri_corecte = 0;
-    raspunsuri = JSON.parse(raspunsuri)
-    for(var i = 0; i < intrebari.length; i++)  {%>
-        <p style="color: blue"><%=intrebari[i].intrebare%></p>
-    <%
-        let correct = false;
-        if (intrebari[i].corect == raspunsuri['question_' + i]){
-            numar_raspunsuri_corecte++;
-            correct = true;
-        }
-        %><ol><%
-        for(var j = 0; j < intrebari[i].variante.length; j++)  {
-            if (intrebari[i].corect == j){%>
-                <li  style="color: green"><%=intrebari[i].variante[j]%></li><br>
-        <%  } else if (j == raspunsuri['question_' + i]) { %>
-                <li style="color: red"><%=intrebari[i].variante[j]%></li><br>
-        <%  } else { %>
-                <li ><%=intrebari[i].variante[j]%></li><br>
-        <%  }
-        }
-        %></ol><%
-    }
-    %>
-<p style="color: magenta">In total ati raspuns <%=numar_raspunsuri_corecte%> intrebari corecte</p>
+            <p class="title">Filme Chestionar Răspunsuri</p>
+
+            <%
+            var numar_raspunsuri_corecte = 0;
+            raspunsuri = JSON.parse(raspunsuri);
+            for(var i = 0; i < intrebari.length; i++)  { %>
+                <div class="quiz_question p-2 m-2">
+                    <p style="color: blue" class="question"><%= i + 1 %>. <span style="color: crimson;">"<%=intrebari[i].movie%>" : </span><%= intrebari[i].intrebare %></p>
+                    <%
+                        let correct = false;
+                        if (intrebari[i].corect == raspunsuri['question_' + i]) {
+                            numar_raspunsuri_corecte++;
+                            correct = true;
+                        }
+                    %>
+                    <ol style="font-weight: bold;">
+                        <%
+                        for(var j = 0; j < intrebari[i].variante.length; j++)  {
+                            if (j == raspunsuri['question_' + i] && j == intrebari[i].corect) { %>
+                                <li style="color: green"><%= intrebari[i].variante[j] %> (your answer is correct)</li>
+                            <% } else if (intrebari[i].corect == j){ %>
+                                <li style="color: magenta"><%= intrebari[i].variante[j] %></li>
+                            <% }  else if (j == raspunsuri['question_' + i]){ %>
+                                <li style="color: red"><%= intrebari[i].variante[j] %> (your answer is wrong)</li>
+                            <% } else { %>
+                                <li><%= intrebari[i].variante[j] %></li>
+                            <% } %>
+                            <br>
+                        <% } %>
+                    </ol>
+                </div>
+            <% } %>
+            <div class="col text-center">
+                <p style="color: magenta">În total ați răspuns <%= numar_raspunsuri_corecte %> întrebări corecte din <%=intrebari.length%>.</p>
+            </div>
+        </div>
+    </div>
+</div>

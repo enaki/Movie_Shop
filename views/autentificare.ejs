@@ -1,24 +1,31 @@
-<div id="scoped-content">
-    <style type="text/css" scoped>
+<!-- Login Form -->
+<div class="row justify-content-center pt-5 bg-light">
 
-    </style>
+<div class="d-flex justify-content-center p-2 w-25 bg-dark" style="border: solid; border-radius: 20px">
+    <form action="/verificare-autentificare" method="post">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </span>
+            </div>
+            <input type="text" id="login" name="login" placeholder="username" value="<%= user %>" style="color:red">
+        </div>
 
-    <div class="wrapper fadeInDown">
-        <div id="formContent">
-
-            <!-- Login Form -->
-            <form action="/verificare-autentificare" method="post" >
-                <input type="text" id="login" name="login" placeholder="login" value="<%=user%>" style="color:red"> <br />
-                <input type="password" id="password" name="login" placeholder="password"> <br />
-                <input type="submit" value="Log In"> <br />
-            </form>
-
-            <!-- Remind Passowrd -->
-            <div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
+        <div class="input-group mt-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                </span>
+            </div>
+            <input type="password" id="password" name="login" placeholder="password">
+        </div>
+            <div class="d-flex justify-content-center login_container mt-3">
+                <button type="submit" class="btn b4-btn-block btn-primary">Login</button>
             </div>
 
-        </div>
-    </div>
+    </form>
+
 </div>
 
+</div>

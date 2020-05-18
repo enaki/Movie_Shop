@@ -1,55 +1,222 @@
 [
   {
-    "intrebare": "Ce gen de filme preferati?",
+    "movie": "Finding Nemo",
+    "intrebare": "What is the name of Nemo's dad?",
     "variante": [
-      "horror",
-      "antena 3 shows",
-      "drama",
-      "actiune"
-    ],
-    "corect": 0
-  },
-  {
-    "intrebare": "Care parte din Harry Potter va place?",
-    "variante": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8"
-    ],
-    "corect": 2
-  },
-  {
-    "intrebare": "Care?",
-    "variante": [
-      "LoTR",
-      "Hobbit",
-      "Insidious"
+      "Joe",
+      "David",
+      "Kevin",
+      "Marlin"
     ],
     "corect": 3
   },
   {
-    "intrebare": "Ce animal are Harry?",
+    "movie": "WALL-E",
+    "intrebare": "What does WALL-E stand for?",
     "variante": [
-      "Câine",
-      "Bufnitță",
-      "Pisică",
-      "Șarpe"
+      "World Administration Life Locator Electrical",
+      "Waste Allocation Load Lifter Earth-Class",
+      "Waste Alien Location Lever Electrifier",
+      "Weird Aliens Love Laughing at Earth"
     ],
     "corect": 1
   },
   {
-    "intrebare": "Cine NU e membru al ordinului Phoenix?",
+    "movie": "The Lion King",
+    "intrebare": "What's the name of Simba's nasty uncle?",
     "variante": [
-      "Remus Lupin",
-      "Siruis Black",
-      "Lucious Malfoy",
-      "Severus Snape"
+      "Scar",
+      "Jafar",
+      "Gaston",
+      "Sphere Khan"
+    ],
+    "corect": 0
+  },
+  {
+    "movie": "Shrek 2",
+    "intrebare": "Which object is stuck in Puss in Boots' hat?",
+    "variante": [
+      "A pencil",
+      "A marmalade sandwitch",
+      "A fluffy feather",
+      "A ribbon"
     ],
     "corect": 2
+  },
+  {
+    "movie": "Coco",
+    "intrebare": "What is Miguel's canine companion called?",
+    "variante": [
+      "Rover",
+      "Fang",
+      "Jeff",
+      "Dante"
+    ],
+    "corect": 3
+  },
+  {
+    "movie": "Tangled",
+    "intrebare": "Which fairytale is this film based on?",
+    "variante": [
+      "Sleeping Beauty",
+      "Hansel and Gretel",
+      "Rapunzel",
+      "The horse and the sword"
+    ],
+    "corect": 2
+  },
+  {
+    "movie": "Up",
+    "intrebare": "What is the name of the talking dog?",
+    "variante": [
+      "Dawg",
+      "Dig",
+      "Dog",
+      "Dug"
+    ],
+    "corect": 3
+  },
+  {
+    "movie": "Ratatouille",
+    "intrebare": "Which restaurant does Remy secretly work at?",
+    "variante": [
+      "La Souris",
+      "La Nourriture",
+      "Gusteau's",
+      "La souriciere"
+    ],
+    "corect": 2
+  },
+  {
+    "movie": "Harry Potter",
+    "intrebare": "What's the name of the dog guarding the Sorcerer’s Stone?",
+    "variante": [
+      "The Grim",
+      "Padfoot",
+      "Fang",
+      "Fluffy"
+    ],
+    "corect": 3
+  },
+  {
+    "movie": "Harry Potter",
+    "intrebare": "What kind of monster is released from the Chamber of Secrets?",
+    "variante": [
+      "Basilisk",
+      "Acromantula",
+      "Boggart",
+      "Voldemort"
+    ],
+    "corect": 0
+  },
+  {
+    "movie": "Harry Potter",
+    "intrebare": "Who is the Heir of Slytherin?",
+    "variante": [
+      "Harry Potter",
+      "Draco Malfoy",
+      "Tom Riddle",
+      "Rubeus Hagrid"
+    ],
+    "corect": 2
+  },
+  {
+    "movie": "Harry Potter",
+    "intrebare": "Which Hogwarts teacher had to be re-cast after the actor playing this character died?",
+    "variante": [
+      "Dumbledore",
+      "Flitwick",
+      "Grubblyplank",
+      "Hagrid"
+    ],
+    "corect": 0
+  },
+  {
+    "movie": "Insidious",
+    "intrebare": "What is “Insidious” about?",
+    "variante": [
+      "Paranormal spirits entering through a portal",
+      "The ghost of a murdered girl seeking revenge",
+      "A seemingly innocent child with a dark side",
+      "An ancient curse attached to a symbolic item"
+    ],
+    "corect": 0
+  },
+  {
+    "movie": "The Lion King",
+    "intrebare": "What do the stars represent to the pride?",
+    "variante": [
+      "Heaven",
+      "Every living thing that came before them",
+      "The great Kings of the past",
+      "Lost souls"
+    ],
+    "corect": 2
+  },
+  {
+    "movie": "Pirates Of The Caribbean",
+    "intrebare": "According to Jack, what does the Black Pearl represent?",
+    "variante": [
+      "Opportunity",
+      "Freedom",
+      "Power",
+      "Independence"
+    ],
+    "corect": 1
+  },
+  {
+    "movie": "Pirates Of The Caribbean",
+    "intrebare": "Where do Will and Jack recruit the rest of the crew?",
+    "variante": [
+      "Kingston",
+      "Havana",
+      "Nassau",
+      "Tortuga"
+    ],
+    "corect": 3
+  },
+  {
+    "movie": "Pirates Of The Caribbean",
+    "intrebare": "What's the name of Barbossa's monkey?",
+    "variante": [
+      "Jeff",
+      "Jack",
+      "Pedro",
+      "George"
+    ],
+    "corect": 1
+  },
+  {
+    "movie": "Mulan",
+    "intrebare": "China goes to war when who invades their country?",
+    "variante": [
+      "The Lings",
+      "The Turks",
+      "The Huns",
+      "The Rus"
+    ],
+    "corect": 2
+  },
+  {
+    "movie": "Ice Age",
+    "intrebare": "What is the mammoth called?",
+    "variante": [
+      "Johnny",
+      "Manny",
+      "Diego",
+      "Veceslav"
+    ],
+    "corect": 1
+  },
+  {
+    "movie": "Ice Age",
+    "intrebare": "What kind of dinosaur is Mama Dino, who appears in the movie 'Ice Age: Dawn of the Dinosaurs'?",
+    "variante": [
+      "Iguanodon",
+      "Diplodocus",
+      "Brontosaurus",
+      "Tyrannosaurus"
+    ],
+    "corect": 3
   }
 ]

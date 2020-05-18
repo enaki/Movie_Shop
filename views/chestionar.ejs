@@ -1,12 +1,24 @@
-<p style="color: red; text-align: center">Filme Chestionar</p>
-<form method="post" action="rezultat-chestionar">
-<% for(var i = 0; i < intrebari.length; i++)  {%>
+<div class="d-flex justify-content-center b4-">
+    <div class='row'>
+        <div class="col-md-12 col-lg-12">
+            <p class="title">Filme Chestionar</p>
+            <form id="quiz" method="post" action="rezultat-chestionar">
+                <% for(var i = 0; i < intrebari.length; i++)  { %>
+                    <div class="quiz_question p-2 m-2">
+                        <p class="question" style="color: blue"><%= i + 1 %>. <span style="color: crimson;">"<%=intrebari[i].movie%>" : </span><%= intrebari[i].intrebare %></p>
+                        <% for(var j = 0; j < intrebari[i].variante.length; j++)  { %>
+                            <input type="radio" id="quiz_<%= i %>_<%= j %>" name="question_<%= i %>" value=<%= j %>>
+                            <label style="color: black" class="pl-2"
+                                   for="quiz_<%= i %>_<%= j %>"><%= intrebari[i].variante[j] %></label>
+                            <br>
+                        <% } %>
+                    </div>
+                <% } %>
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-primary m-2 p-2">Trimite</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-    <p style="color: blue"><%=intrebari[i].intrebare%></p>
-    <% for(var j = 0; j < intrebari[i].variante.length; j++)  { %>
-        <input type="radio" id="quiz_<%=j%>" name="question_<%=i%>" value=<%=j%>>
-        <label for="quiz_<%=j%>"><%=intrebari[i].variante[j]%></label><br>
-    <%} %>
-<%} %>
-<button >Trimite</button>
-</form>
