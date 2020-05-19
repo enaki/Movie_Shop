@@ -3,12 +3,22 @@
     "utilizator": "test",
     "parola": "test",
     "nume": "Richard",
-    "prenume": "Fred"
+    "prenume": "Risitas",
+    "role": "user"
   },
   {
     "utilizator": "fred",
     "parola": "fred",
-    "nume": "Alexandro",
-    "prenume": "Risitas"
+    "nume": "Alehandro",
+    "prenume": "Fred",
+    "role": "user"
+
+  },
+  {
+    "utilizator": "god",
+    "parola": "god",
+    "nume": "Seful",
+    "prenume": "Boris",
+    "role": "admin"
   }
 ]

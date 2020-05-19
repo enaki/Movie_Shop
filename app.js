@@ -19,29 +19,11 @@ app.use(cookieParser());
 app.use(session({
     key: 'user_sid',
     secret: 'secret',
-    resave: false,
     saveUninitialized: false,
-    cookie: {
-        expires: 10000
-    }
+    resave: false
 }));
-session.user = null;
 
-app.get('/', async (req, res) =>{
-    console.log('cookies: ', req.cookies);
-    //let user = req.cookies["utilizator"];
-    let username=null;
-    if (session.user){
-        //username = user["nume"];
-        username = session.user;
-    }
-    //console.log("User : ", user);
-    res.clearCookie('utilizator');
-    let produse = await myDb.getItems();
-    console.log(produse);
-    res.render('index', {user: username, produse: produse});
-});
-
+//load intrebari, users and produse
 (async function(){
     listaIntrebari = await utilities.readFileAsync("data/intrebari.json");
     users = await utilities.readFileAsync("data/utilizatori.json");
@@ -49,26 +31,72 @@ app.get('/', async (req, res) =>{
 })();
 
 
+app.get('/', async (req, res) =>{
+    console.log('cookies: ', req.cookies);
+    let username=null;
+    if (req.session.user){
+        username = req.session.user;
+    }
+    res.clearCookie('utilizator');
+    let produse = await myDb.getItems();
+    res.render('index', {user: username, produse: produse});
+});
+
+
+app.get('/autentificare', (req, res) => {
+    if(req.session.user){   //if logged
+        res.redirect("/");
+        return;
+    }
+    let user = req.cookies["autentificare_user"];
+    let username = null;
+    if (user){
+        username = user["nume"];
+    }
+    let messageError = false;
+    if(typeof req.cookies.messageError != "undefined" && req.cookies.messageError === "yes"){
+        messageError = true;
+        res.clearCookie("messageError");
+    }
+    res.render("autentificare", {user: username, messageError: messageError});
+});
+
+
+app.post('/verificare-autentificare', (req, res) => {
+    let user = req.body;
+    console.log("Verificare user: ", user);
+    let username = user.login[0],
+        password = user.login[1];
+    for (let index in users){
+        if (username === users[index]["utilizator"] && password===users[index]["parola"]){
+            req.session.user = username;
+            res.cookie("autentificare_user", {nume: username});
+            res.redirect("/");
+            return;
+        }
+    }
+    res.cookie("messageError", "yes");
+    res.clearCookie("autentificare_user")
+    res.redirect("/autentificare");
+});
+
+
+app.get('/log-out', (req, res) => {
+    if (typeof req.session.user != "undefined"){
+        console.log("Sesiune utilizator [Log-OUT]: ", req.session.user);
+        req.session.user = undefined;
+    }
+    res.redirect('/');
+});
+
 
 app.get('/chestionar', (req, res) => {
     res.render('chestionar', {intrebari: listaIntrebari});
 });
 
+
 app.post('/rezultat-chestionar', (req, res) => {
     res.render('rezultat-chestionar', {intrebari: listaIntrebari, raspunsuri: JSON.stringify(req.body)});
-});
-
-app.get('/autentificare', (req, res) => {
-    if(req.session.user){
-        res.redirect("/");
-        return;
-    }
-    let user = req.cookies["autentificare_user"];
-    let username=null;
-    if (user){
-        username = user["nume"];
-    }
-    res.render('autentificare', {user: username});
 });
 
 
@@ -76,6 +104,7 @@ app.get("/creare-bd", async (req, res) => {
     await myDb.createDatabase();
     res.redirect("/");
 });
+
 
 app.get("/inserare-bd", async (req, res) => {
     await myDb.populateDatabase(produse);
@@ -116,38 +145,16 @@ app.get("/vizualizare-cos", async (req, res) => {
     res.render("vizualizare-cos", {user: "fred", produse : detailed_items});
 });
 
-app.post('/verificare-autentificare', (req, res) => {
-    let user = req.body;
-    console.log("Verificare user: ", user);
-    let username = user.login[0],
-        password = user.login[1];
-    for (let index in users){
-        if (username === users[index]["utilizator"] && password===users[index]["parola"]){
-            session.user = username;
-            res.cookie("utilizator", {nume: username})
-            res.cookie("autentificare_user", {nume: username})
-        }
-    }
-    res.redirect('http://localhost:6789');
-});
 
 app.post('/adaugare_cos', (req, res) => {
     let item = req.body.id;
     console.log(item);
-    if (req.session.cart === undefined){
+    if (typeof req.session.cart != "undefined"){
         req.session.cart = [];
     }
     req.session.cart.push(item);
-    //res.sendStatus(200);
     res.redirect("/");
 });
 
-app.get('/log-out', (req, res) => {
-    if (session.user){
-        console.log("Sesiune utilizator [Log-OUT]: ",session.user);
-        session.user = null;
-    }
-    res.redirect('http://localhost:6789');
-});
 
 app.listen(port, () => console.log(`Serverul rulează la adresa http://localhost:6789`));

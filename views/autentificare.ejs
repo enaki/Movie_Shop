@@ -4,6 +4,9 @@
 
 <div class="d-flex justify-content-center p-2 w-25 bg-dark" style="border: solid; border-radius: 20px">
     <form action="/verificare-autentificare" method="post">
+        <%if (messageError) {%>
+            <div class="text-center p-1 m-1" style="color: red">*** Date invalide ***</div>
+        <%}%>
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">
