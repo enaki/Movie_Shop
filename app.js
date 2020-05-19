@@ -3,11 +3,9 @@ const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const mongo = require('mongodb');
-const fs = require('fs');
 
-const MongoClient = mongo.MongoClient;
-const ObjectId = mongo.ObjectID;
+const myDb = require('./modules/database.js');
+const utilities = require('./modules/utilities.js');
 
 const app = express();
 const port = 6789;
@@ -29,77 +27,6 @@ app.use(session({
 }));
 session.user = null;
 
-let myDb = {
-    getItems: async function(){
-        return new Promise((resolve, reject) => {
-            let url = "mongodb://localhost:27017/";
-            MongoClient.connect(url, {useUnifiedTopology: true,}, function(err, db) {
-                if (err) throw err;
-                let dbo = db.db("cumparaturi");
-                dbo.collection("produse").find({}).toArray(function(err, result) {
-                    if (err) throw err;
-                    resolve(result);
-                    db.close();
-                });
-            });
-        });
-    },
-    createDatabase: async function(){
-        return new Promise((resolve, reject) => {
-            let url = "mongodb://localhost:27017/cumparaturi";
-            MongoClient.connect(url, {useUnifiedTopology: true,},function (err, db) {
-                if (err) throw err;
-                console.log("Database created!");
-                let dbo = db.db("cumparaturi");
-                dbo.collection("produse").drop( function(err, delOK) {
-                    if (err) throw err;
-                    if (delOK) console.log("Collection 'produse' deleted");
-                    dbo.createCollection("produse", function(err, res) {
-                        if (err) throw err;
-                        console.log("Collection 'produse' created!");
-                        resolve();
-                        db.close();
-                    });
-                });
-            });
-        });
-    },
-    populateDatabase: async function(){
-        return new Promise((resolve, reject) => {
-            let url = "mongodb://localhost:27017/";
-            MongoClient.connect(url, {useUnifiedTopology: true,}, function(err, db) {
-                if (err) throw err;
-                let dbo = db.db("cumparaturi");
-                dbo.collection("produse").insertMany(produse, function(err, res) {
-                    if (err) throw err;
-                    resolve();
-                    db.close();
-                });
-            });
-        });
-    },
-    getProductById: async function(id){
-        return new Promise((resolve, reject) => {
-            let url = "mongodb://localhost:27017/";
-            MongoClient.connect(url, {useUnifiedTopology: true,}, function(err, db) {
-                if (err) throw err;
-                let dbo = db.db("cumparaturi");
-                let query = {"_id": ObjectId(id)};
-                dbo.collection("produse").find(query).toArray(function(err, result) {
-                    if (err) throw err;
-                    if (result.length > 0){
-                        resolve(result[0]);
-                    } else {
-                        resolve(result);
-                    }
-                    db.close();
-                });
-            });
-        });
-    }
-}
-
-
 app.get('/', async (req, res) =>{
     console.log('cookies: ', req.cookies);
     //let user = req.cookies["utilizator"];
@@ -115,22 +42,13 @@ app.get('/', async (req, res) =>{
     res.render('index', {user: username, produse: produse});
 });
 
-let listaIntrebari, users, produse;
+(async function(){
+    listaIntrebari = await utilities.readFileAsync("data/intrebari.json");
+    users = await utilities.readFileAsync("data/utilizatori.json");
+    produse = await utilities.readFileAsync("data/movies.json");
+})();
 
-fs.readFile('intrebari.json', function read(err, rawdata) {
-    if (err) { throw err; }
-    listaIntrebari = JSON.parse(rawdata)
-});
 
-fs.readFile('utilizatori.json', function read(err, rawdata) {
-    if (err) { throw err; }
-    users = JSON.parse(rawdata)
-});
-
-fs.readFile('movies.json', function read(err, rawdata) {
-    if (err) { throw err; }
-    produse = JSON.parse(rawdata)
-});
 
 app.get('/chestionar', (req, res) => {
     res.render('chestionar', {intrebari: listaIntrebari});
@@ -156,12 +74,12 @@ app.get('/autentificare', (req, res) => {
 
 app.get("/creare-bd", async (req, res) => {
     await myDb.createDatabase();
-    res.sendStatus(200);
+    res.redirect("/");
 });
 
 app.get("/inserare-bd", async (req, res) => {
-    await myDb.populateDatabase();
-    res.sendStatus(200);
+    await myDb.populateDatabase(produse);
+    res.redirect("/");
 });
 
 
