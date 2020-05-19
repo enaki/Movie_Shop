@@ -69,7 +69,7 @@ app.post('/verificare-autentificare', (req, res) => {
         password = user.login[1];
     for (let index in users){
         if (username === users[index]["utilizator"] && password===users[index]["parola"]){
-            req.session.user = username;
+            req.session.user = users[index]["prenume"];
             res.cookie("autentificare_user", {nume: username});
             res.redirect("/");
             return;
@@ -85,6 +85,9 @@ app.get('/log-out', (req, res) => {
     if (typeof req.session.user != "undefined"){
         console.log("Sesiune utilizator [Log-OUT]: ", req.session.user);
         req.session.user = undefined;
+    }
+    if (typeof req.session.cart != "undefined"){
+        req.session.cart = undefined;
     }
     res.redirect('/');
 });
@@ -114,6 +117,10 @@ app.get("/inserare-bd", async (req, res) => {
 
 app.get("/vizualizare-cos", async (req, res) => {
     console.log("------------Vizualizare-----------")
+    if(typeof req.session.user === "undefined"){   //if not logged
+        res.redirect("/");
+        return;
+    }
     let detailed_items = []
     if (req.session.cart){
         let array_elements = req.session.cart;
@@ -125,8 +132,8 @@ app.get("/vizualizare-cos", async (req, res) => {
             if (array_elements[i] !== current) {
                 if (cnt > 0) {
                     let produs = await myDb.getProductById(current);
-                    console.log(produs)
-                    detailed_items.push({titlu: produs.titlu, price: produs.price, cantitate: cnt});
+                    produs.cantitate = cnt;
+                    detailed_items.push(produs);
                 }
                 current = array_elements[i];
                 cnt = 1;
@@ -136,24 +143,35 @@ app.get("/vizualizare-cos", async (req, res) => {
         }
         if (cnt > 0) {
             let produs = await myDb.getProductById(current);
-            console.log(produs)
-            detailed_items.push({titlu: produs.titlu, price: produs.price, cantitate: cnt});
+            produs.cantitate = cnt;
+            detailed_items.push(produs);
         }
-        //console.log(detailed_items);
     }
-    //res.render('index', {user: username, produse: produse});
-    res.render("vizualizare-cos", {user: "fred", produse : detailed_items});
+    res.render("vizualizare-cos", {user: req.session.user, produse : detailed_items});
 });
 
 
 app.post('/adaugare_cos', (req, res) => {
     let item = req.body.id;
     console.log(item);
-    if (typeof req.session.cart != "undefined"){
+    if (typeof req.session.cart === "undefined"){
         req.session.cart = [];
     }
     req.session.cart.push(item);
     res.redirect("/");
+});
+
+
+app.get('/sterge_item', (req, res) => {
+    let item = req.query.id;
+    if (typeof req.session.cart === "undefined"){
+        req.session.cart = [];
+    }
+    const index = req.session.cart.indexOf(item);
+    if (index > -1) {
+        req.session.cart.splice(index, 1);
+    }
+    res.redirect("/vizualizare-cos");
 });
 
 

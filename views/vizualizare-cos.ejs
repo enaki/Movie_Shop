@@ -1,8 +1,9 @@
-<h1>Bine ați venit la cosul dumneavoastra
+<h1 class="text-center p-5" style="color: purple">Bine ați venit la coșul dumneavoastră
     <%
     if (user){
-    %>, <%=user%>
-    <%}%>
+    %>
+    , <%= user %>
+    <% } %>
     !
 </h1>
 
@@ -10,21 +11,39 @@
     <thead class="thead-dark">
     <tr>
         <th scope="col">#</th>
-        <th scope="col">Produs</th>
-        <th scope="col">Pret</th>
+        <th scope="col">Movie</th>
+        <th scope="col">Denumire</th>
+        <th scope="col">Preț</th>
         <th scope="col">Cantitate</th>
         <th scope="col">Cost</th>
+        <th scope="col">Operațiuni</th>
     </tr>
     </thead>
     <tbody>
-    <% for(var i = 0; i < produse.length; i++)  { %>
+    <%
+    let sum = 0;
+    for(var i = 0; i < produse.length; i++)  { %>
     <tr>
-        <th scope="col"><%=i+1%></th>
-        <th scope="col"><%=produse[i].titlu%></th>
-        <th scope="col"><%=produse[i].price%></th>
-        <th scope="col"><%=produse[i].cantitate%></th>
-        <th scope="col"><%=produse[i].cantitate * produse[i].price%></th>
+        <td class="align-middle bold" scope="col"><%= i+1 %>.</td>
+        <td class="align-middle bold" scope="col" scope="col"><img src="/images/<%= produse[i].image %>"
+                                                                   alt="Not Found Image" border=3 height=75 width=75/>
+        </td>
+        <td class="align-middle bold" scope="col"><%= produse[i].titlu %></td>
+        <td class="align-middle bold" scope="col"><%= produse[i].price %> $</td>
+        <td class="align-middle bold" scope="col"><%= produse[i].cantitate %></td>
+        <td class="align-middle bold" scope="col"><%= produse[i].cantitate * produse[i].price %> $</td>
+        <td class="align-middle" scope="col">
+            <a class="btn btn-primary" href="/sterge_item?id=<%= produse[i]._id %>">Șterge</a>
+        </td>
+        <% sum += produse[i].cantitate * produse[i].price; %>
     </tr>
-    <%} %>
+    <% } %>
+
     </tbody>
+    <tfoot>
+    <tr>
+        <th class="text-right bold" colspan="5" style="color: blue">Total:</th>
+        <td class="align-middle bold"><%=sum%> $</td>
+    </tr>
+    </tfoot>
 </table>

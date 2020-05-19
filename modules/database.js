@@ -6,7 +6,6 @@ const ObjectId = mongo.ObjectID;
 module.exports = {
     getItems: async function(){
         return new Promise((resolve, reject) => {
-            let url = "mongodb://localhost:27017/";
             MongoClient.connect(url, {useUnifiedTopology: true,}, function(err, db) {
                 if (err) throw err;
                 let dbo = db.db("cumparaturi");
@@ -20,7 +19,6 @@ module.exports = {
     },
     createDatabase: async function(){
         return new Promise((resolve, reject) => {
-            let url = "mongodb://localhost:27017/cumparaturi";
             MongoClient.connect(url, {useUnifiedTopology: true,},function (err, db) {
                 if (err) throw err;
                 console.log("Database created!");
@@ -40,21 +38,23 @@ module.exports = {
     },
     populateDatabase: async function(products){
         return new Promise((resolve, reject) => {
-            let url = "mongodb://localhost:27017/";
             MongoClient.connect(url, {useUnifiedTopology: true,}, function(err, db) {
                 if (err) throw err;
                 let dbo = db.db("cumparaturi");
-                dbo.collection("produse").insertMany(products, function(err, res) {
+                dbo.collection("produse").drop( function(err, delOK) {
                     if (err) throw err;
-                    resolve();
-                    db.close();
+                    if (delOK) console.log("Collection 'produse' deleted");
+                    dbo.collection("produse").insertMany(products, function(err, res) {
+                        if (err) throw err;
+                        resolve();
+                        db.close();
+                    });
                 });
             });
         });
     },
     getProductById: async function(id){
         return new Promise((resolve, reject) => {
-            let url = "mongodb://localhost:27017/";
             MongoClient.connect(url, {useUnifiedTopology: true,}, function(err, db) {
                 if (err) throw err;
                 let dbo = db.db("cumparaturi");

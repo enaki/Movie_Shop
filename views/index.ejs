@@ -1,51 +1,50 @@
 <div class="container text-center">
     <div class='container-fluid'>
-        <h1 style="color: red">Bine ați venit
-            <%
-            if (user){
-            %>
+        <h1 class="m-3" style="color: red">Bine ați venit
+            <% if (user){ %>
             , <%= user %>
             <% } %>
             !
         </h1>
-        </br>
-        <div class="row">
+        <div class="row mt-3">
             <div class="b4-col-lg-10 col-mg-10 col-sm-8">
 
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Produs</th>
-                        <th scope="col">Pret</th>
-                        <th scope="col">Operatiuni</th>
+                        <th scope="col">Movie</th>
+                        <th scope="col">Denumire</th>
+                        <th scope="col">Preț</th>
+                        <th scope="col">Operațiuni</th>
                     </tr>
                     </thead>
                     <tbody>
                     <% for(var i = 0; i < produse.length; i++)  { %>
                     <tr>
-                        <th scope="col"><%= i+1 %></th>
-                        <th scope="col"><%= produse[i].titlu %></th>
-                        <th scope="col"><%= produse[i].price %></th>
-                        <th scope="col">
+                        <td class="align-middle" scope="col"><%= i+1 %>.</td>
+                        <td class="align-middle" scope="col"><img src="/images/<%= produse[i].image %>" alt="Not Found Image" border=3 height=75 width=75/></td>
+                        <td class="align-middle" scope="col"><%= produse[i].titlu %></td>
+                        <td class="align-middle" scope="col"><%= produse[i].price %> $</td>
+                        <td class="align-middle" scope="col">
                             <% if (user){ %>
                             <form action="/adaugare_cos" method="post">
                                 <input type="hidden" id="custId" name="id" value="<%= produse[i]._id %>">
-                                <button class="btn btn-primary" type="submit">Adauga</button>
+                                <button class="btn btn-primary" type="submit">Adaugă</button>
                             </form>
 
                             <% } %>
-                        </th>
+                        </td>
                     </tr>
                     <% } %>
                     </tbody>
                 </table>
             </div>
             <div class="b4-col-lg-1 col-mg-1 col-sm-4">
-                <a name="" id="" class="btn btn-primary btn-block " href="/creare-bd" role="button">Creare BD</a> <br/>
-                <a name="" id="" class="btn btn-primary btn-block" href="/inserare-bd" role="button">Încărcare BD</a>
+                <a name="" id="" class="btn btn-warning btn-block" href="/creare-bd" role="button">Creare BD</a> <br/>
+                <a name="" id="" class="btn btn-success btn-block" href="/inserare-bd" role="button">Încărcare BD</a>
                 <% if (user){ %>
-                    <a name="" id="" class="btn btn-primary btn-block" href="/vizualizare-cos" role="button">Vizualizare
+                    <a name="" id="" class="btn btn-success btn-block" href="/vizualizare-cos" role="button">Vizualizare
                         Cos</a>
                 <% } %>
             </div>

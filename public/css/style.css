@@ -26,6 +26,10 @@ li a {
     text-align: center;
 }
 
+tr, td{
+    font-weight: bold;
+}
+
 input[type='radio']:after {
     width: 1.2rem;
     height: 1.2rem;
@@ -60,4 +64,9 @@ html, body {
     background: #e0ecc9;
     border: solid #ffa500;
     border-radius: 20px;
+}
+
+nav ul li a{
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1.2rem;
 }

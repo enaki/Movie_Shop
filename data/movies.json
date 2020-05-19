@@ -1,19 +1,52 @@
 [
   {
-    "titlu": "Harry Potter",
-    "price": 10
+    "titlu": "Harry Potter 2",
+    "price": 20,
+    "image": "harry_potter_2.png"
   },
   {
-    "titlu": "Star Wars",
-    "price": 20
+    "titlu": "Ice Age 3",
+    "price": 26.5,
+    "image": "ice_age.png"
   },
   {
-    "titlu": "Insidious",
-    "price": 30
+    "titlu": "The Hobbit",
+    "price": 29.75,
+    "image": "hobbit.png"
+  },
+  {
+    "titlu": "Alexander",
+    "price": 28.5,
+    "image": "alexander.png"
+  },
+  {
+    "titlu": "Shrek 2",
+    "price": 23.5,
+    "image": "shrek.png"
+  },
+  {
+    "titlu": "The Pirates of The Caribbean 2",
+    "price": 29.5,
+    "image": "carribean.jpg"
+  },
+  {
+    "titlu": "Harry Potter 4",
+    "price": 22.5,
+    "image": "harry_potter_4.png"
   },
   {
     "titlu": "Conjuring",
-    "price": 40
+    "price": 15,
+    "image": "conjuring.jpg"
+  },
+  {
+    "titlu": "Insidious",
+    "price": 18,
+    "image": "insidious.png"
+  },
+  {
+    "titlu": "The Lion King",
+    "price": 25,
+    "image": "the_lion_king.jpg"
   }
-
 ]
