@@ -26,5 +26,12 @@
     "nume": "Enachi",
     "prenume": "Vasile",
     "role": "user"
+  },
+  {
+    "utilizator": "tioscalan",
+    "parola": "hophop",
+    "nume": "etsam",
+    "prenume": "tiosca",
+    "role": "admin"
   }
 ]

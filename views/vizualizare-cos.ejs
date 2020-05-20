@@ -1,11 +1,4 @@
-<h1 class="text-center p-5" style="color: purple">Bine ați venit la coșul dumneavoastră
-    <%
-    if (user){
-    %>
-    , <%= user %>
-    <% } %>
-    !
-</h1>
+<h1 class="text-center p-5" style="color: purple">Bine ați venit la coșul dumneavoastră<% if (user){ %>, <%= user %><% } %>!</h1>
 
 <table class="table">
     <thead class="thead-dark">
@@ -29,9 +22,9 @@
                                                                    alt="Not Found Image" border=3 height=75 width=75/>
         </td>
         <td class="align-middle bold" scope="col"><%= produse[i].titlu %></td>
-        <td class="align-middle bold" scope="col"><%= produse[i].price %> $</td>
+        <td class="align-middle bold" scope="col">$<%= produse[i].price %></td>
         <td class="align-middle bold" scope="col"><%= produse[i].cantitate %></td>
-        <td class="align-middle bold" scope="col"><%= produse[i].cantitate * produse[i].price %> $</td>
+        <td class="align-middle bold" scope="col">$<%= produse[i].cantitate * produse[i].price %></td>
         <td class="align-middle" scope="col">
             <a class="btn btn-danger" href="/sterge_item?id=<%= produse[i]._id %>">Șterge</a>
         </td>
@@ -43,7 +36,7 @@
     <tfoot>
     <tr>
         <th class="text-right bold" colspan="5" style="color: blue">Total:</th>
-        <td class="align-middle bold"><%=sum%> $</td>
+        <td class="align-middle bold">$<%=sum%></td>
     </tr>
     </tfoot>
 </table>
