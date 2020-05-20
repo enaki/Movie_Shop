@@ -5,9 +5,9 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
 
-
 const myDb = require('./modules/database.js');
 const utilities = require('./modules/utilities.js');
+const security = require('./modules/security')
 
 const app = express();
 const port = 6789;
@@ -32,18 +32,17 @@ app.use(session({
     produse = await utilities.readFileAsync("data/movies.json");
 })();
 
-let ipDictFails = {};   //dict: ip -> numar_tentative_atac
-let blackList = [];     //blocked ips
 
 app.use((req, res, next) => {
     let client_ip = req.connection.remoteAddress;
-    if (blackList.includes(client_ip)) {
+    if (security.isIpBlocked(client_ip)) {
         console.log("Ip " + client_ip + " is blocked.")
-        res.send(404, "Wait for 30 seconds pls. You are blocked.");
+        res.status(404).send("Wait for 10 seconds pls. You are blocked.");
     } else {
         next();
     }
 });
+
 
 app.get('/', async (req, res) => {
     console.log('cookies: ', req.cookies);
@@ -125,9 +124,15 @@ app.post('/verificare-autentificare', (req, res) => {
             return;
         }
     }
+    let client_ip = req.connection.remoteAddress;
+    console.log("Client " + client_ip + " has failed to login " + req.url);
     res.cookie("messageError", "yes");
-    res.clearCookie("autentificare_user")
-    res.redirect("/autentificare");
+    res.clearCookie("autentificare_user");
+    if (security.needToBlockIp(client_ip)) {
+        res.status(405).sendFile('404.png', {root: path.join(__dirname, 'public/images')});
+    } else {
+        res.redirect("/autentificare");
+    }
 });
 
 
@@ -248,31 +253,17 @@ app.post('/upload_item', utilities.upload.single('photo'), async (req, res) => {
     res.sendStatus(403)
 });
 
-const unblockIp = ((blockedIp) => function () {
-    blackList.splice(blackList.indexOf(blockedIp), 1);
-    console.log("Unblocked ip " + blockedIp);
-});
 
 //handle invalid urls
 app.use((req, res) => {
     let client_ip = req.connection.remoteAddress;
     console.log("Client " + client_ip + " is requesting the resource: " + req.url);
-    if (blackList.indexOf(client_ip) > -1) {
-        return;
-    }
-    if (!ipDictFails[client_ip]) {
-        ipDictFails[client_ip] = 0;
-    }
-    ipDictFails[client_ip]++;
-    if (ipDictFails[client_ip] === 3) {
-        ipDictFails[client_ip] = 0;
-        blackList.push(client_ip);
-        setTimeout(unblockIp(client_ip), 30000);
-        console.log("Blocked ip " + client_ip);
+    if (security.needToBlockIp(client_ip)){
         res.status(405).sendFile('404.png', {root: path.join(__dirname, 'public/images')});
     } else {
         res.redirect("/");
     }
 });
+
 
 app.listen(port, () => console.log(`Serverul rulează la adresa http://localhost:6789`));
