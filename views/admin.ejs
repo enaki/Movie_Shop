@@ -1,0 +1,31 @@
+<div class="container bg-dark p-5 m-5">
+    <form action="/upload_item" method="post" enctype="multipart/form-data">
+        <div class="form-group row">
+            <label for="title" class="col-sm-2 col-form-label bold" style="color: white">Denumire</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" placeholder="Title" name="title" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="price" class="col-sm-2 col-form-label bold" style="color: white">Preț</label>
+            <div class="col-sm-10">
+                <input type="number" min="0.00" class="form-control" id="price" name="price" placeholder="Price"
+                       required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="photo" class="col-sm-2 col-form-label bold" style="color: white">Imagine</label>
+            <div class="col-sm-10">
+                <input style="color: white" class="form-control-file" type="file" accept="image/png" name="photo"
+                       required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit" class="btn btn-warning btn-block">Add Movie</button>
+            </div>
+        </div>
+    </form>
+</div>

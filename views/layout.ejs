@@ -38,6 +38,11 @@
         <li class="nav-item">
             <a class="nav-link p-2" href="/log-out"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Log Out</a>
         </li>
+        <%if (typeof role != "undefined" && role === "admin") {%>
+            <li class="nav-item">
+                <a class="nav-link p-2" href="/admin"><i class="fa fa-user-secret" aria-hidden="true"></i> Admin</a>
+            </li>
+        <%}%>
     </ul>
 </nav>
 <div id="container">

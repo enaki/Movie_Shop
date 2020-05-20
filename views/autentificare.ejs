@@ -2,34 +2,32 @@
 
 <div class="row justify-content-center pt-5 bg-light h-100">
 
-<div class="d-flex justify-content-center p-2 w-25 bg-dark" style="border: solid; border-radius: 20px">
-    <form action="/verificare-autentificare" method="post">
-        <%if (messageError) {%>
-            <div class="text-center p-1 m-1" style="color: #ff0000">*** Date invalide ***</div>
-        <%}%>
-        <div class="input-group">
-            <div class="input-group-prepend">
+    <div class="d-flex justify-content-center p-2 w-25 bg-dark" style="border: solid; border-radius: 20px">
+        <form action="/verificare-autentificare" method="post">
+            <% if (messageError) { %>
+                <div class="text-center p-1 m-1" style="color: #ff0000">*** Date invalide ***</div>
+            <% } %>
+            <div class="input-group">
+                <div class="input-group-prepend">
                 <span class="input-group-text">
                     <i class="fa fa-user" aria-hidden="true"></i>
                 </span>
+                </div>
+                <input type="text" id="login" name="login" placeholder="username" value="<%= user %>"
+                       style="color:#f700ff" required>
             </div>
-            <input type="text" id="login" name="login" placeholder="username" value="<%= user %>" style="color:#f700ff">
-        </div>
 
-        <div class="input-group mt-3">
-            <div class="input-group-prepend">
+            <div class="input-group mt-3">
+                <div class="input-group-prepend">
                 <span class="input-group-text">
                     <i class="fa fa-lock" aria-hidden="true"></i>
                 </span>
+                </div>
+                <input type="password" id="password" name="login" placeholder="password" required>
             </div>
-            <input type="password" id="password" name="login" placeholder="password">
-        </div>
             <div class="d-flex justify-content-center login_container mt-3">
                 <button type="submit" class="btn b4-btn-block btn-primary">Login</button>
             </div>
-
-    </form>
-
-</div>
-
+        </form>
+    </div>
 </div>

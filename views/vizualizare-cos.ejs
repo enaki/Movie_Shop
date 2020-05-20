@@ -33,7 +33,7 @@
         <td class="align-middle bold" scope="col"><%= produse[i].cantitate %></td>
         <td class="align-middle bold" scope="col"><%= produse[i].cantitate * produse[i].price %> $</td>
         <td class="align-middle" scope="col">
-            <a class="btn btn-primary" href="/sterge_item?id=<%= produse[i]._id %>">Șterge</a>
+            <a class="btn btn-danger" href="/sterge_item?id=<%= produse[i]._id %>">Șterge</a>
         </td>
         <% sum += produse[i].cantitate * produse[i].price; %>
     </tr>
