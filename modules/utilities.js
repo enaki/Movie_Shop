@@ -23,5 +23,18 @@ module.exports = {
             });
         });
     },
+    writeFileAsync: function (filename, user) {
+        return new Promise((resolve, reject) => {
+            fs.readFile(filename, 'utf8', function readFileCallback(err, data){
+                if (err){
+                    console.log(err);
+                } else {
+                    let obj = JSON.parse(data);
+                    obj.push(user);
+                    fs.writeFile(filename, JSON.stringify(obj), function(err){ if(err) throw err;});
+                    resolve();
+                }});
+        });
+    },
     upload: multer({storage: storage})
 }

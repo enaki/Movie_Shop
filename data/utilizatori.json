@@ -12,7 +12,6 @@
     "nume": "Alehandro",
     "prenume": "Fred",
     "role": "user"
-
   },
   {
     "utilizator": "god",
@@ -20,5 +19,12 @@
     "nume": "Seful",
     "prenume": "Boris",
     "role": "admin"
+  },
+  {
+    "utilizator": "enaki",
+    "parola": "fred",
+    "nume": "Enachi",
+    "prenume": "Vasile",
+    "role": "user"
   }
 ]

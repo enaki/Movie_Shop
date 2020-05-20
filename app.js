@@ -58,6 +58,37 @@ app.get('/', async (req, res) => {
 });
 
 
+app.get('/register', (req, res) => {
+    res.render('register');
+});
+
+
+app.post('/register', async (req, res) => {
+    let user = req.body;
+    console.log(user);
+    if (user.password !== user.passwordConfirmation) {
+        res.render("register", {messageError: "Parola nu corespunde la verificare"});
+        return;
+    }
+    for (let index in users) {
+        if (user.username === users[index]["utilizator"]) {
+            res.render("register", {messageError: "User existent"});
+            return;
+        }
+    }
+    let new_user = {
+        "utilizator": user.username,
+        "parola": user.password,
+        "nume": user.lastname,
+        "prenume": user.firstname,
+        "role": "user"
+    }
+    users.push(new_user);
+    await utilities.writeFileAsync("data/utilizatori.json", new_user);
+    res.redirect("autentificare");
+});
+
+
 app.get('/autentificare', (req, res) => {
     if (req.session.user) {   //if logged
         res.redirect("/");
@@ -195,25 +226,25 @@ app.get('/sterge_item', (req, res) => {
 
 
 app.get('/admin', (req, res) => {
-    //if (typeof req.session.user != "undefined" && req.session.user.role === "admin"){
-    res.render("admin");
-    return;
-    //}
+    if (typeof req.session.user != "undefined" && req.session.user.role === "admin") {
+        res.render("admin");
+        return;
+    }
     res.sendStatus(403)
 });
 
 
 app.post('/upload_item', utilities.upload.single('photo'), async (req, res) => {
-    //if (typeof req.session.user != "undefined" && req.session.user.role === "admin"){
-    let form = req.body;
-    console.log(form);
-    console.log(req.file);
-    if (req.file && typeof form.price != "undefined" && typeof form.title != "undefined") {
-        await myDb.insertProduct({"image": req.file.filename, "titlu": form.title, "price": form.price});
-        res.redirect("/");
-        return;
-    } else throw 'error';
-    //}
+    if (typeof req.session.user != "undefined" && req.session.user.role === "admin") {
+        let form = req.body;
+        console.log(form);
+        console.log(req.file);
+        if (req.file && typeof form.price != "undefined" && typeof form.title != "undefined") {
+            await myDb.insertProduct({"image": req.file.filename, "titlu": form.title, "price": form.price});
+            res.redirect("/");
+            return;
+        } else throw 'error';
+    }
     res.sendStatus(403)
 });
 
@@ -226,19 +257,22 @@ const unblockIp = ((blockedIp) => function () {
 app.use((req, res) => {
     let client_ip = req.connection.remoteAddress;
     console.log("Client " + client_ip + " is requesting the resource: " + req.url);
-        if (!ipDictFails[client_ip]) {
-            ipDictFails[client_ip] = 0;
-        }
-        ipDictFails[client_ip]++;
-        if (ipDictFails[client_ip] === 3) {
-            ipDictFails[client_ip] = 0;
-            blackList.push(client_ip);
-            setTimeout(unblockIp(client_ip), 30000);
-            console.log("Blocked ip " + client_ip);
-            res.status(405).sendFile('404.png', {root: path.join(__dirname, 'public/images')});
-        } else {
-            res.redirect("/");
-        }
+    if (blackList.indexOf(client_ip) > -1) {
+        return;
+    }
+    if (!ipDictFails[client_ip]) {
+        ipDictFails[client_ip] = 0;
+    }
+    ipDictFails[client_ip]++;
+    if (ipDictFails[client_ip] === 3) {
+        ipDictFails[client_ip] = 0;
+        blackList.push(client_ip);
+        setTimeout(unblockIp(client_ip), 30000);
+        console.log("Blocked ip " + client_ip);
+        res.status(405).sendFile('404.png', {root: path.join(__dirname, 'public/images')});
+    } else {
+        res.redirect("/");
+    }
 });
 
 app.listen(port, () => console.log(`Serverul rulează la adresa http://localhost:6789`));
