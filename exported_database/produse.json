@@ -1,0 +1,71 @@
+[{
+  "_id": {
+    "$oid": "5ecd14e95c6ede38c4b3a8ee"
+  },
+  "titlu": "Harry Potter 2",
+  "price": 20,
+  "image": "harry_potter_2.png"
+},{
+  "_id": {
+    "$oid": "5ecd14e95c6ede38c4b3a8ef"
+  },
+  "titlu": "Ice Age 3",
+  "price": 26.5,
+  "image": "ice_age.png"
+},{
+  "_id": {
+    "$oid": "5ecd14e95c6ede38c4b3a8f0"
+  },
+  "titlu": "The Hobbit",
+  "price": 29.75,
+  "image": "hobbit.png"
+},{
+  "_id": {
+    "$oid": "5ecd14e95c6ede38c4b3a8f1"
+  },
+  "titlu": "Alexander",
+  "price": 28.5,
+  "image": "alexander.png"
+},{
+  "_id": {
+    "$oid": "5ecd14e95c6ede38c4b3a8f2"
+  },
+  "titlu": "Shrek 2",
+  "price": 23.5,
+  "image": "shrek.png"
+},{
+  "_id": {
+    "$oid": "5ecd14e95c6ede38c4b3a8f3"
+  },
+  "titlu": "The Pirates of The Caribbean 2",
+  "price": 29.5,
+  "image": "carribean.jpg"
+},{
+  "_id": {
+    "$oid": "5ecd14e95c6ede38c4b3a8f4"
+  },
+  "titlu": "Ratatouille",
+  "price": 22.5,
+  "image": "ratatouille.png"
+},{
+  "_id": {
+    "$oid": "5ecd14e95c6ede38c4b3a8f5"
+  },
+  "titlu": "Conjuring",
+  "price": 15,
+  "image": "conjuring.jpg"
+},{
+  "_id": {
+    "$oid": "5ecd14e95c6ede38c4b3a8f6"
+  },
+  "titlu": "Insidious",
+  "price": 18,
+  "image": "insidious.png"
+},{
+  "_id": {
+    "$oid": "5ecd14e95c6ede38c4b3a8f7"
+  },
+  "titlu": "The Lion King",
+  "price": 25,
+  "image": "the_lion_king.jpg"
+}]
